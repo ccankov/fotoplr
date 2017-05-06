@@ -5,6 +5,8 @@ class User < ApplicationRecord
   validates :password, length: { minimum: 6 }, allow_nil: true
   validates :email, :session_token, uniqueness: true
 
+  has_many :photos
+
   after_initialize :ensure_session_token
 
   def self.generate_session_token
