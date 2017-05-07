@@ -15,6 +15,8 @@ class PhotosController < ApplicationController
     @photo = Photo.new(photo_params)
     @photo.user_id = current_user.id
     if @photo.save
+      msg = PhotoMailer.photo_email(@photo, current_user)
+      msg.deliver_now
       redirect_to photos_url
     else
       flash[:errors] = @photo.errors.full_messages
