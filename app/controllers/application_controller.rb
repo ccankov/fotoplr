@@ -17,8 +17,6 @@ class ApplicationController < ActionController::Base
   end
 
   def logged_in?
-    unless current_user
-      redirect_to new_session_url
-    end
+    redirect_to new_session_url unless current_user
   end
 end

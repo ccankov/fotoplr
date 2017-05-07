@@ -1,5 +1,11 @@
 <h1>Your Photos</h1>
 
-<ul>
-  <%= render @photos %>
-</ul>
+<div class="media">
+  <% @photos.each do |photo| %>
+  <figure>
+    <h4 class="media-heading"><%= photo.title %></h4>
+    <!-- Renders image -->
+    <%= link_to image_tag(photo.image.url, class: 'media-object'), photo.image.url, target: '_blank' %>
+  </figure>
+  <% end %>
+</div>
