@@ -8,5 +8,6 @@ img {
 }
 
 .media {
-  display: flex
+  display: flex;
+  flex-wrap: wrap;
 }

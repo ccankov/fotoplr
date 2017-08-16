@@ -1,7 +1,7 @@
 require 'tempfile'
 
 class Photo < ApplicationRecord
-  validates :user, :title, presence: true
+  validates :user, presence: true
 
   has_attached_file :image
   # This validates the type of file uploaded. According to this, only images are allowed.

@@ -3,6 +3,7 @@ class PhotosController < ApplicationController
 
   def index
     @photos = current_user.photos
+    @photo = Photo.new
     render :index
   end
 
@@ -12,9 +13,8 @@ class PhotosController < ApplicationController
   end
 
   def create
-    @photo = Photo.new(photo_params)
-    photo.take_photo
-    @photo.user_id = current_user.id
+    @photo = Photo.new(user_id: current_user.id)
+    @photo.take_photo
     if @photo.save
       msg = PhotoMailer.photo_email(@photo, current_user)
       msg.deliver_now
@@ -23,11 +23,5 @@ class PhotosController < ApplicationController
       flash[:errors] = @photo.errors.full_messages
       redirect_to new_photo_url
     end
-  end
-
-  private
-
-  def photo_params
-    params.require(:photo).permit(:image, :title)
   end
 end

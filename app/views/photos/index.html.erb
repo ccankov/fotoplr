@@ -1,9 +1,29 @@
 <h1>Your Photos</h1>
 
+<%= form_for @photo, html: { multipart: true } do |f| %>
+  <% if @photo.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= "#{pluralize(@photo.errors.count, "error")} prohibited this photo from being saved:" %>
+      </h2>
+      <ul>
+        <% @photo.errors.full_messages.each do |msg| %>
+          <li>
+            <%= msg %>
+          </li>
+          <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.submit 'Take Photo', class: 'btn btn-default' %>
+  </div>
+<% end %>
+
 <div class="media">
   <% @photos.each do |photo| %>
   <figure>
-    <h4 class="media-heading"><%= photo.title %></h4>
     <!-- Renders image -->
     <%= link_to image_tag(photo.image.url, class: 'media-object'), photo.image.url, target: '_blank' %>
   </figure>
