@@ -1,3 +1,5 @@
+require 'tempfile'
+
 class Photo < ApplicationRecord
   validates :user, :title, presence: true
 
@@ -6,4 +8,18 @@ class Photo < ApplicationRecord
   validates_attachment_content_type :image, content_type: /\Aimage\/.*\z/
 
   belongs_to :user
+
+  def take_photo
+    cam = Camera.first
+    photo = cam.take_photo
+    temp_file = Tempfile.new(['temp', '.jpg'], encoding: 'ascii-8bit')
+
+    begin
+      temp_file.write(photo)
+      self.image = temp_file
+    ensure
+      temp_file.close
+      temp_file.unlink
+    end
+  end
 end

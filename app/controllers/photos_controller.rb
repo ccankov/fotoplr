@@ -13,6 +13,7 @@ class PhotosController < ApplicationController
 
   def create
     @photo = Photo.new(photo_params)
+    photo.take_photo
     @photo.user_id = current_user.id
     if @photo.save
       msg = PhotoMailer.photo_email(@photo, current_user)
