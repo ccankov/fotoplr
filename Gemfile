@@ -7,6 +7,7 @@ end
 
 gem 'annotate'
 gem 'bcrypt'
+gem 'mailgun-ruby', '~>1.1.6'
 gem 'paperclip', '~> 5.0.0'
 gem 'aws-sdk', '~> 2.3.0'
 gem 'envyable'
