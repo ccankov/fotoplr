@@ -25,7 +25,7 @@
   <% @photos.each do |photo| %>
   <figure>
     <!-- Renders image -->
-    <%= link_to image_tag(photo.image.url, class: 'media-object'), photo.image.url, target: '_blank' %>
+    <%= link_to image_tag(photo.image.url, class: 'media-object'), photo.image.url(:thumb), target: '_blank' %>
   </figure>
   <% end %>
 </div>
