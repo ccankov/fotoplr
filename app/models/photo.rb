@@ -3,7 +3,14 @@ require 'tempfile'
 class Photo < ApplicationRecord
   validates :user, presence: true
 
-  has_attached_file :image
+  has_attached_file :image, styles: {
+                              thumb: "200x150#",
+                              small: "250x200>",
+                              medium: "800x600"
+                            },
+                            convert_options: {
+                              thumb: "-quality 75 -strip"
+                            }
   # This validates the type of file uploaded. According to this, only images are allowed.
   validates_attachment_content_type :image, content_type: /\Aimage\/.*\z/
 
