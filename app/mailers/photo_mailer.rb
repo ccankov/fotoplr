@@ -1,5 +1,5 @@
 class PhotoMailer < ApplicationMailer
-  default from: 'photos@fotoplr.com'
+  default from: 'Fotoplr <photos@fotoplr.com>'
 
   def photo_email(photo, user)
     @user = user
